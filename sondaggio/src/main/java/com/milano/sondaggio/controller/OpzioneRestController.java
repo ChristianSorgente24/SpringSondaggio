@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,12 +19,12 @@ public class OpzioneRestController {
 	
 	
 	@PostMapping("/insertOpzione")
-	public void insertOpzione(@RequestBody Opzione opzione) {
+	public void insertOpzione(Opzione opzione) {
 		 opzioneService.saveOpzione(opzione);
 	}
 	
 	@PutMapping("/updateOpzione")
-	public void updateOpzione(@RequestBody Opzione opzione) {
+	public void updateOpzione(Opzione opzione) {
 		 opzioneService.saveOpzione(opzione);
 	}
 	
