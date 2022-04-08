@@ -47,4 +47,9 @@ public class SondaggioServiceImpl implements SondaggioService {
 		sondaggioRepository.save(sondaggio);
 	}
 
+	@Override
+	public List<Sondaggio> ricercaSondaggiByQuery(String query) {
+		return sondaggioRepository.findByDomandaLike(query);
+	}
+
 }

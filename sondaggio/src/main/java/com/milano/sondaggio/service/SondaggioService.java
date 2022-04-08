@@ -18,4 +18,6 @@ public interface SondaggioService {
 	long count();
 
 	void updateSondaggio(Sondaggio sondaggio);
+	
+	List<Sondaggio> ricercaSondaggiByQuery(String query);
 }
