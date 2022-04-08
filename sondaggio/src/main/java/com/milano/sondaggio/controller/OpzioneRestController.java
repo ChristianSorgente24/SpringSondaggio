@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.milano.sondaggio.model.Opzione;
+import com.milano.sondaggio.service.OpzioneService;
+
 @RestController
 @RequestMapping("/api/opzione")
 public class OpzioneRestController {
@@ -18,17 +21,17 @@ public class OpzioneRestController {
 	
 	@PostMapping("/insertOpzione")
 	public void insertOpzione(@RequestBody Opzione opzione) {
-		return opzioneService.saveOpzione(opzione);
+		 opzioneService.saveOpzione(opzione);
 	}
 	
 	@PutMapping("/updateOpzione")
 	public void updateOpzione(@RequestBody Opzione opzione) {
-		return opzioneService.saveOpzione(opzione);
+		 opzioneService.saveOpzione(opzione);
 	}
 	
 	@DeleteMapping("/deleteOpzione/{id}")
 	public void deleteOpzione(@PathVariable long id) {
-		return opzioneService.deleteOpzione(id);
+		 opzioneService.deleteOpzioneById(id);
 	}
 	
 	
