@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.milano.sondaggio.model.Sondaggio;
 import com.milano.sondaggio.repository.SondaggioRepository;
-import com.milano.sondaggio.service.SondaggiService;
+import com.milano.sondaggio.service.SondaggioService;
 
 
-public class SondaggioServiceImpl implements SondaggiService {
+public class SondaggioServiceImpl implements SondaggioService {
 
 	@Autowired
 	private SondaggioRepository sondaggioRepository;

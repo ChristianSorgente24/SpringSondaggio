@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.milano.sondaggio.model.Sondaggio;
 
-public interface SondaggiService {
+public interface SondaggioService {
 
 	void saveSondaggio(Sondaggio sondaggio);
 
