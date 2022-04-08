@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.milano.sondaggio.model.Sondaggio;
 import com.milano.sondaggio.repository.SondaggioRepository;
 import com.milano.sondaggio.service.SondaggioService;
 
-
+@Service("sondaggioService")
 public class SondaggioServiceImpl implements SondaggioService {
 
 	@Autowired
