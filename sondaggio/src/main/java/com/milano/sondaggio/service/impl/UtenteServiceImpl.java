@@ -41,4 +41,9 @@ public class UtenteServiceImpl implements UtenteService {
 
 	}
 
+	@Override
+	public Utente findByEmail(String email) {
+		return utenteRepository.findByEmail(email);
+	}
+
 }

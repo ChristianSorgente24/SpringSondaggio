@@ -11,5 +11,5 @@ public interface UtenteRepository extends CrudRepository<Utente, Long>{
 	
 	public Utente findByUsername(@Param("username") String username);
 	public Utente deleteByUsername(@Param("username") String username);
-	
+	public Utente findByEmail(@Param("email")String email);
 }

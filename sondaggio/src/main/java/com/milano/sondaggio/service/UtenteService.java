@@ -13,5 +13,5 @@ public interface UtenteService {
 	long count();
 	
 	void deleteByUsername(String username);
-	
+	Utente findByEmail(String email);
 }
