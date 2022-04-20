@@ -46,4 +46,9 @@ public class UtenteServiceImpl implements UtenteService {
 		return utenteRepository.findByEmail(email);
 	}
 
+	@Override
+	public Utente findById(long id) {
+		return utenteRepository.findById(id).get();
+	}
+
 }

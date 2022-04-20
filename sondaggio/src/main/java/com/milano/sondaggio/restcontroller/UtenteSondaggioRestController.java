@@ -1,6 +1,5 @@
 package com.milano.sondaggio.restcontroller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +21,7 @@ import com.milano.sondaggio.service.UtenteSondaggioService;
 @RequestMapping("/api/utenteSondaggio")
 public class UtenteSondaggioRestController {
 
-	final String id_user = "id_user";
-	final String username = "username";
-
-	@Autowired
+		@Autowired
 	private UtenteSondaggioService utenteSondaggioService;
 	@Autowired
 	private UtenteService utenteservice;
@@ -33,10 +29,10 @@ public class UtenteSondaggioRestController {
 	private OpzioneService opzioneService;
 
 	@GetMapping("/canVoto/{id}")
-	public boolean canVoto(@PathVariable long id_sondaggio, HttpServletRequest request) {
+	public boolean canVoto(@PathVariable long id_sondaggio, HttpSession session) {
 
 		// ########################### MOMENTANEO #########################
-		long id_utente = (long) request.getSession().getAttribute(id_user);
+		long id_utente = (Long)session.getAttribute("id_utente");
 
 		if (utenteSondaggioService.findByUtenteAndSondaggio(id_utente, id_sondaggio) != null)
 			return true;
@@ -48,7 +44,9 @@ public class UtenteSondaggioRestController {
 	public void insertVoto(@PathVariable long id, HttpSession session) {
 
 		// ########################### MOMENTANEO #########################
-		Utente utente = utenteservice.findByUsername((String)session.getAttribute(username));
+		long id_utente = (Long)session.getAttribute("id_utente");
+
+		Utente utente = utenteservice.findById(id_utente);
 		Opzione opzione = opzioneService.getById(id).get();
 		
 		

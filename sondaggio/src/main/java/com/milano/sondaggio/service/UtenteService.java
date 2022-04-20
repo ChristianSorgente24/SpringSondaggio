@@ -11,7 +11,7 @@ public interface UtenteService {
 	List<Utente> getAll();
 	Utente findByUsername(String username);
 	long count();
-	
+	Utente findById(long id);
 	void deleteByUsername(String username);
 	Utente findByEmail(String email);
 }
