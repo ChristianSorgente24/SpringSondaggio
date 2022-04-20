@@ -3,6 +3,7 @@ package com.milano.sondaggio.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.milano.sondaggio.service.SondaggioService;
 
 @RestController
 @RequestMapping("/api/sondaggio")
+@CrossOrigin(origins = "")
 public class SondaggioRestController {
 	@Autowired
 	private SondaggioService sondaggioService;
