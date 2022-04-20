@@ -28,6 +28,5 @@ public class Opzione implements Serializable{
 	@JoinColumn(name="id_sondaggio")
 	private Sondaggio sondaggio;
 	
-	
 	private String descrizione;
 }
