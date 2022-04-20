@@ -3,6 +3,7 @@ package com.milano.sondaggio.service.impl;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,11 @@ public class OpzioneServiceImpl implements OpzioneService{
 	@Override
 	public List<Opzione> getAllBySondaggio(long idSondaggio) {
 		return opzioneRepository.getAllBySondaggio(idSondaggio);
+	}
+
+	@Override
+	public Optional<Opzione> getById(long id) {
+		return opzioneRepository.findById(id);
 	}
 	
 }

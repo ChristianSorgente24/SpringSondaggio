@@ -1,4 +1,4 @@
-package com.milano.sondaggio.controller;
+package com.milano.sondaggio.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +20,7 @@ public class OpzioneRestController {
 	
 	@PostMapping("/insertOpzione")
 	public void insertOpzione(Opzione opzione) {
+		System.err.println(opzione.getDescrizione());
 		 opzioneService.saveOpzione(opzione);
 	}
 	

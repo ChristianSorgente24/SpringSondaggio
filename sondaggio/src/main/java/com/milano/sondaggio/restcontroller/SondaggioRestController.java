@@ -1,4 +1,4 @@
-package com.milano.sondaggio.controller;
+package com.milano.sondaggio.restcontroller;
 
 import java.util.List;
 
