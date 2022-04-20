@@ -54,11 +54,11 @@ public class UtenteRestController {
 	
 	@PostMapping(value="/login")
 	public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
-		if(session.getAttribute("utente") == null) {
+		if(session.getAttribute("id_utente") == null) {
 			Utente utente = utenteService.findByUsername(username);
 			if(utente != null)
 				if(passwordEncoder.matches(password, utente.getPassword())) {
-				session.setAttribute("utente", utente);
+				session.setAttribute("id_utente", utente.getId());
 				return "{ris:'loggato'}";
 			}
 			return "{ris:'Username/password errati'}";
@@ -68,14 +68,14 @@ public class UtenteRestController {
 	
 	@GetMapping(value="/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("utente");
+		session.removeAttribute("id_utente");
 		return "{ris: 'ok'}";
 	}
 	
 	//testa se sei loggato
 	@GetMapping(value="/testlogin")
 	public String testss(HttpSession session) {
-		if(session.getAttribute("utente") != null) {
+		if(session.getAttribute("id_utente") != null) {
 			return "{ris:'sei loggato'}";
 		}
 		return "{ris:'loggati prima'}";
