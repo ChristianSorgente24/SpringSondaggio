@@ -59,10 +59,14 @@ public class UtenteRestController {
 			if(utente != null)
 				if(passwordEncoder.matches(password, utente.getPassword())) {
 				session.setAttribute("id_utente", utente.getId());
+				System.err.println("===== Loggato =====");
 				return "{ris:'loggato'}";
 			}
+			System.err.println("===== errore =====");
+			
 			return "{ris:'Username/password errati'}";
 		}
+		System.err.println("===== Gia Loggato =====");
 		return "{ris: 'già loggato'}";
 	}
 	
