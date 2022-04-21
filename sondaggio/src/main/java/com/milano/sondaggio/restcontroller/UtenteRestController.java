@@ -1,5 +1,6 @@
 package com.milano.sondaggio.restcontroller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -29,10 +30,10 @@ public class UtenteRestController {
 	
 	@PostMapping(value = "/registra")
 	@ResponseBody
-	public Response registraUtente(@RequestParam Map<String, String> body) {
+	public String registraUtente(@RequestParam Map<String, String> body) {
 		
 		Utente utente = utenteService.findByUsername(body.get("username"));
-		Response r = new Response();
+		
 		if(utente == null) {
 			utente = new Utente();
 			utente.setUsername(body.get("username"));
@@ -40,19 +41,13 @@ public class UtenteRestController {
 			utente.setRuolo("USER");
 			utente.setEmail(body.get("email"));
 			if(utenteService.findByEmail(utente.getEmail())!=null){
-				r.setCode(0);
-				r.setMessage("Email già utilizzata");
-				return r;
+				return "{ris:'email già utilizzata'}";
 			}
 			utenteService.save(utente);
 			System.out.println(body.toString());
-			r.setCode(1);
-			r.setMessage("Registrazione completata");
-			return r;
+			return "{ris: 'ok'}";
 		}else{
-			r.setCode(0);
-			r.setMessage("Username già utilizzato");
-			return r;
+			return "{ris:'username già utilizzato'}";
 		}
 		
 		
@@ -67,10 +62,10 @@ public class UtenteRestController {
 			if(utente != null)
 				if(passwordEncoder.matches(password, utente.getPassword())) {
 				session.setAttribute("id_utente", utente.getId());
-				System.err.println("===== Loggato =====");
+				System.err.println("===== Loggato"+(Long)session.getAttribute("id_utente")+" =====");
 				r.setCode(1);
 				r.setMessage("Loggato con sucesso");
-				return r;
+				return r;	
 			}
 			System.err.println("===== errore =====");
 			

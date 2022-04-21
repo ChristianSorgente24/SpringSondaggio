@@ -21,7 +21,7 @@ import com.milano.sondaggio.service.UtenteSondaggioService;
 @RequestMapping("/api/utenteSondaggio")
 public class UtenteSondaggioRestController {
 
-		@Autowired
+	@Autowired
 	private UtenteSondaggioService utenteSondaggioService;
 	@Autowired
 	private UtenteService utenteservice;
@@ -42,10 +42,16 @@ public class UtenteSondaggioRestController {
 
 	@PostMapping("/insertVoto/{id}")
 	public void insertVoto(@PathVariable long id, HttpSession session) {
-
+		
+		System.err.println("===== Insert Voto =====");
+		System.err.println("===== id_opzione"+id+" =====");
+		System.err.println("===== id_utente"+(Long)session.getAttribute("id_utente")+" =====");
 		// ########################### MOMENTANEO #########################
 		long id_utente = (Long)session.getAttribute("id_utente");
+		
+		
 
+		
 		Utente utente = utenteservice.findById(id_utente);
 		Opzione opzione = opzioneService.getById(id).get();
 		
