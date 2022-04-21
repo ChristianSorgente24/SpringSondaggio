@@ -1,5 +1,6 @@
 package com.milano.sondaggio.restcontroller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.milano.sondaggio.model.Response;
 import com.milano.sondaggio.model.Utente;
 import com.milano.sondaggio.service.UtenteService;
 
@@ -53,36 +55,43 @@ public class UtenteRestController {
 	}
 	
 	@PostMapping(value="/login")
-	public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+	public Response login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+		Response r = new Response();
 		if(session.getAttribute("id_utente") == null) {
 			Utente utente = utenteService.findByUsername(username);
 			if(utente != null)
 				if(passwordEncoder.matches(password, utente.getPassword())) {
 				session.setAttribute("id_utente", utente.getId());
 				System.err.println("===== Loggato =====");
-				return "{ris:'loggato'}";
+				r.setCode(1);
+				r.setMessage("Loggato con sucesso");
+				return r;
 			}
 			System.err.println("===== errore =====");
 			
-			return "{ris:'Username/password errati'}";
+			r.setCode(0);
+			r.setMessage("Username/password errata");
+			return r;
 		}
 		System.err.println("===== Gia Loggato =====");
-		return "{ris: 'già loggato'}";
+		r.setCode(2);
+		r.setMessage("Utente già loggato");
+		return r;
 	}
 	
 	@GetMapping(value="/logout")
-	public String logout(HttpSession session) {
+	public Response logout(HttpSession session) {
 		session.removeAttribute("id_utente");
-		return "{ris: 'ok'}";
+		return new Response(1,"Logout effettuato",null);
 	}
 	
 	//testa se sei loggato
 	@GetMapping(value="/testlogin")
-	public String testss(HttpSession session) {
+	public Response testss(HttpSession session) {
 		if(session.getAttribute("id_utente") != null) {
-			return "{ris:'sei loggato'}";
+			return new Response(1,"Loggato",null);
 		}
-		return "{ris:'loggati prima'}";
+		return new Response(0,"Loggati prima",null);
 	}
 	
 }
