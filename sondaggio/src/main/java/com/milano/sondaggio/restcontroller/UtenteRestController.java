@@ -1,6 +1,5 @@
 package com.milano.sondaggio.restcontroller;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -30,10 +29,10 @@ public class UtenteRestController {
 	
 	@PostMapping(value = "/registra")
 	@ResponseBody
-	public String registraUtente(@RequestParam Map<String, String> body) {
+	public Response registraUtente(@RequestParam Map<String, String> body) {
 		
 		Utente utente = utenteService.findByUsername(body.get("username"));
-		
+		Response r = new Response();
 		if(utente == null) {
 			utente = new Utente();
 			utente.setUsername(body.get("username"));
@@ -41,13 +40,19 @@ public class UtenteRestController {
 			utente.setRuolo("USER");
 			utente.setEmail(body.get("email"));
 			if(utenteService.findByEmail(utente.getEmail())!=null){
-				return "{ris:'email già utilizzata'}";
+				r.setCode(0);
+				r.setMessage("Email già utilizzata");
+				return r;
 			}
 			utenteService.save(utente);
 			System.out.println(body.toString());
-			return "{ris: 'ok'}";
+			r.setCode(1);
+			r.setMessage("Registrazione completata");
+			return r;
 		}else{
-			return "{ris:'username già utilizzato'}";
+			r.setCode(0);
+			r.setMessage("Username già utilizzato");
+			return r;
 		}
 		
 		
