@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import com.milano.sondaggio.service.UtenteService;
 
 @RestController
 @RequestMapping("/api/utente")
+//@CrossOrigin(origins = "http://127.0.0.1:4200", allowedHeaders = "*")
 public class UtenteRestController {
 	
 	@Autowired
@@ -53,21 +55,23 @@ public class UtenteRestController {
 	}
 	
 	@PostMapping(value="/login")
-	public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+	public long login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+		System.err.println("===== Login... =====");
+		
 		if(session.getAttribute("id_utente") == null) {
 			Utente utente = utenteService.findByUsername(username);
 			if(utente != null)
 				if(passwordEncoder.matches(password, utente.getPassword())) {
 				session.setAttribute("id_utente", utente.getId());
 				System.err.println("===== Loggato =====");
-				return "{ris:'loggato'}";
+				return 1;//login effettuato
 			}
 			System.err.println("===== errore =====");
 			
-			return "{ris:'Username/password errati'}";
+			return -1; //password/username errato
 		}
 		System.err.println("===== Gia Loggato =====");
-		return "{ris: 'già loggato'}";
+		return 0;//gia loggato
 	}
 	
 	@GetMapping(value="/logout")
