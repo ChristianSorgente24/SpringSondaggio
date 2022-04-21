@@ -1,7 +1,10 @@
 package com.milano.sondaggio.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,7 +20,6 @@ public class OpzioneRestController {
 	@Autowired
 	private OpzioneService opzioneService;
 	
-	
 	@PostMapping("/insertOpzione")
 	public void insertOpzione(Opzione opzione) {
 		System.err.println(opzione.getDescrizione());
@@ -32,6 +34,11 @@ public class OpzioneRestController {
 	@DeleteMapping("/deleteOpzione/{id}")
 	public void deleteOpzione(@PathVariable long id) {
 		 opzioneService.deleteOpzioneById(id);
+	}
+	
+	@GetMapping("/getOpzioniSondaggio/{id}")
+	public List<Opzione> getOpzioniSondaggio(@PathVariable long id) {
+		 return opzioneService.getAllBySondaggio(id);
 	}
 	
 	

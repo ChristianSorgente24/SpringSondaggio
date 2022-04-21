@@ -24,7 +24,7 @@ public class Opzione implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_sondaggio")
 	private Sondaggio sondaggio;
 	
