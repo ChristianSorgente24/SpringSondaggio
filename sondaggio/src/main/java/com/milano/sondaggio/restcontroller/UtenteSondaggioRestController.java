@@ -44,8 +44,8 @@ public class UtenteSondaggioRestController {
 	public void insertVoto(@PathVariable long id, HttpSession session) {
 		
 		System.err.println("===== Insert Voto =====");
-		System.err.println("===== id_opzione"+id+" =====");
-		System.err.println("===== id_utente"+(Long)session.getAttribute("id_utente")+" =====");
+		System.err.println("===== id_opzione= "+id+" =====");
+		System.err.println("===== id_utente= "+(Long)session.getAttribute("id_utente")+" =====");
 		// ########################### MOMENTANEO #########################
 		long id_utente = (Long)session.getAttribute("id_utente");
 		

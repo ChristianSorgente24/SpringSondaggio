@@ -1,6 +1,5 @@
 package com.milano.sondaggio.restcontroller;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
