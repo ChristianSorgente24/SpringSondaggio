@@ -2,6 +2,8 @@ package com.milano.sondaggio.restcontroller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.milano.sondaggio.model.Response;
 import com.milano.sondaggio.model.Sondaggio;
 import com.milano.sondaggio.service.SondaggioService;
 
@@ -23,8 +26,16 @@ public class SondaggioRestController {
 	private SondaggioService sondaggioService;
 	
 	@PostMapping("/insertSondaggio")
-	public void InsertSondaggio(Sondaggio sondaggio) {
+	public Response InsertSondaggio(Sondaggio sondaggio, HttpSession session) {
+		if(session.getAttribute("id_utente") == null) {
+			return new Response(0,"Loggati prima",null);
+		}
 		sondaggioService.saveSondaggio(sondaggio);
+		Response r = new Response();
+		r.setCode(1);
+		r.setMessage("Sondaggio inserito corretamente");
+		r.setData(sondaggio.getId());
+		return r;
 	}
 	
 	@GetMapping("/sondaggi")
