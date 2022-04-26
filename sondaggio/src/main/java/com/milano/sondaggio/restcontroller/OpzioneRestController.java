@@ -41,5 +41,9 @@ public class OpzioneRestController {
 		 return opzioneService.getAllBySondaggio(id);
 	}
 	
+	@GetMapping("/countVoti/{id}")
+	public int countVoti(@PathVariable long id) {
+		 return opzioneService.countVoti(id);
+	}
 	
 }

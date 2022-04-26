@@ -8,7 +8,7 @@ import com.milano.sondaggio.model.Opzione;
 public interface OpzioneService {
 	void saveOpzione(Opzione opzione);
 	void deleteOpzioneById(long id);
-	long count();
+	int countVoti(long id_opzione);
 	List<Opzione> getAllBySondaggio(long idSondaggio);
 	Optional<Opzione> getById(long id);
 }

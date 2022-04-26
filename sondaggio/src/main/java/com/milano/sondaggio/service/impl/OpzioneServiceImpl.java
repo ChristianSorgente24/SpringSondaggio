@@ -28,8 +28,8 @@ public class OpzioneServiceImpl implements OpzioneService{
 	}
 
 	@Override
-	public long count() {
-		return opzioneRepository.count();
+	public int countVoti(long id_opzione) {
+		return opzioneRepository.countVoti(id_opzione);
 	}
 
 	@Override
