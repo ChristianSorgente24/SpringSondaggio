@@ -3,6 +3,8 @@ package com.milano.sondaggio.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.milano.sondaggio.model.Sondaggio;
+import com.milano.sondaggio.model.Utente;
 import com.milano.sondaggio.model.UtenteSondaggio;
 import com.milano.sondaggio.repository.UtenteSondaggioRepository;
 import com.milano.sondaggio.service.UtenteSondaggioService;
@@ -28,7 +30,7 @@ public class UtenteSondaggioServiceImpl implements UtenteSondaggioService{
 	}
 
 	@Override
-	public UtenteSondaggio findByUtenteAndSondaggio(long utente, long sondaggio) {
+	public UtenteSondaggio findByUtenteAndSondaggio(Utente utente, Sondaggio sondaggio) {
 		return utenteSondaggioRepository.findByUtenteAndSondaggio(utente, sondaggio);
 	}
 

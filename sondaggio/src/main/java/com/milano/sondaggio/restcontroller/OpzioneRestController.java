@@ -45,5 +45,4 @@ public class OpzioneRestController {
 	public int countVoti(@PathVariable long id) {
 		 return opzioneService.countVoti(id);
 	}
-	
 }

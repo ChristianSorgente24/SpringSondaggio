@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.milano.sondaggio.model.Opzione;
+import com.milano.sondaggio.model.Sondaggio;
 import com.milano.sondaggio.model.Utente;
 import com.milano.sondaggio.model.UtenteSondaggio;
 import com.milano.sondaggio.service.OpzioneService;
+import com.milano.sondaggio.service.SondaggioService;
 import com.milano.sondaggio.service.UtenteService;
 import com.milano.sondaggio.service.UtenteSondaggioService;
 
@@ -27,17 +29,31 @@ public class UtenteSondaggioRestController {
 	private UtenteService utenteservice;
 	@Autowired
 	private OpzioneService opzioneService;
+	@Autowired
+	private SondaggioService sondaggioService;
 
-	@GetMapping("/canVoto/{id}")
-	public boolean canVoto(@PathVariable long id_sondaggio, HttpSession session) {
+	@GetMapping("/canVoto/{id_sondaggio}")
+	public long canVoto(@PathVariable long id_sondaggio, HttpSession session) {
 
 		// ########################### MOMENTANEO #########################
 		long id_utente = (Long)session.getAttribute("id_utente");
-
-		if (utenteSondaggioService.findByUtenteAndSondaggio(id_utente, id_sondaggio) != null)
-			return true;
-		else
-			return false;
+		
+		System.err.println("===== Can voto =====");
+		System.err.println("===== id_utente= "+id_utente+" =====");
+		System.err.println("===== id_sondaggio= "+id_sondaggio+" =====");
+		
+		Utente utente = utenteservice.findById(id_utente);
+		Sondaggio sondaggio = sondaggioService.findById(id_sondaggio).get();
+		
+		UtenteSondaggio utenteSondaggio = utenteSondaggioService.findByUtenteAndSondaggio(utente, sondaggio);
+		
+		System.err.println("===== Ha votato= "+utenteSondaggio.getOpzione().getId()+" =====");
+		
+		
+		if (utenteSondaggio != null)
+			return utenteSondaggio.getOpzione().getId();
+		
+		return 0;
 	}
 
 	@PostMapping("/insertVoto/{id}")
