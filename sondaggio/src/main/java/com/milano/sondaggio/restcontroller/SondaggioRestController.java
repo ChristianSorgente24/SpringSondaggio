@@ -38,6 +38,20 @@ public class SondaggioRestController {
 		return r;
 	}
 	
+	@PostMapping("/updateSondaggio")
+	public Response updateSondaggio(Sondaggio sondaggio, HttpSession session) {
+		if(session.getAttribute("id_utente") == null) {
+			return new Response(0,"Loggati prima",null);
+		}
+		sondaggioService.saveSondaggio(sondaggio);
+		Response r = new Response();
+		r.setCode(1);
+		r.setMessage("Sondaggio modificato corretamente");
+		r.setData(sondaggio.getId());
+		return r;
+	}
+	
+	
 	@GetMapping("/sondaggi")
 	public List<Sondaggio> getSondaggio(){
 		return sondaggioService.getAll();
