@@ -79,6 +79,21 @@ public class UtenteSondaggioRestController {
 
 		utenteSondaggioService.save(utenteSondaggio);
 	}
+	
+	@PostMapping("/updateVoto/{id}/{opzione}")
+public void updateVoto(@PathVariable long id, HttpSession session) {
+		
+		System.err.println("===== Update Voto =====");
+		System.err.println("===== id_voto= "+id+" =====");
+		// ########################### MOMENTANEO #########################
+		Opzione opzione = opzioneService.getById(id).get();
+		
+		UtenteSondaggio us = utenteSondaggioService.getUtenteSondaggioById(id);
+		
+		us.setOpzione(opzione);
+
+		utenteSondaggioService.save(us);
+	}
 
 	@DeleteMapping("/deleteVoto/{id}")
 	public void deleteVoto(@PathVariable long id) {
