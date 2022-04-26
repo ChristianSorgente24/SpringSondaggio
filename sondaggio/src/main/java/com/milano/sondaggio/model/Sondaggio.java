@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import lombok.Data;
 
 @Entity
@@ -19,6 +22,7 @@ public class Sondaggio implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private long id;
 	@Column(nullable = false)
 	private String domanda;
