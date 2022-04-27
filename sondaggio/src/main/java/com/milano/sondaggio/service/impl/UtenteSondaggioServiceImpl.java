@@ -10,10 +10,10 @@ import com.milano.sondaggio.repository.UtenteSondaggioRepository;
 import com.milano.sondaggio.service.UtenteSondaggioService;
 
 @Service("utenteSondaggioService")
-public class UtenteSondaggioServiceImpl implements UtenteSondaggioService{
+public class UtenteSondaggioServiceImpl implements UtenteSondaggioService {
 	@Autowired
 	UtenteSondaggioRepository utenteSondaggioRepository;
-	
+
 	@Override
 	public void save(UtenteSondaggio utenteSondaggio) {
 		utenteSondaggioRepository.save(utenteSondaggio);
@@ -32,6 +32,21 @@ public class UtenteSondaggioServiceImpl implements UtenteSondaggioService{
 	@Override
 	public UtenteSondaggio findByUtenteAndSondaggio(Utente utente, Sondaggio sondaggio) {
 		return utenteSondaggioRepository.findByUtenteAndSondaggio(utente, sondaggio);
+	}
+
+	@Override
+	public void deleteByUtenteSondaggio(UtenteSondaggio utenteSondaggio) {
+		utenteSondaggioRepository.delete(utenteSondaggio);
+	}
+
+	@Override
+	public void deleteById(long id) {
+		utenteSondaggioRepository.deleteById(id);
+	}
+
+	@Override
+	public void update(long id_new_opzione, long id_record) {
+		utenteSondaggioRepository.updateVoto(id_new_opzione, id_record);
 	}
 
 }

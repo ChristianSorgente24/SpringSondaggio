@@ -9,4 +9,7 @@ public interface UtenteSondaggioService {
 	UtenteSondaggio getUtenteSondaggioById(long id);
 	void delete(long id);
 	UtenteSondaggio findByUtenteAndSondaggio(Utente utente, Sondaggio sondaggio);
+	void deleteByUtenteSondaggio(UtenteSondaggio utenteSondaggio);
+	void deleteById(long id);
+	void update(long id_new_opzione, long id_record);
 }
