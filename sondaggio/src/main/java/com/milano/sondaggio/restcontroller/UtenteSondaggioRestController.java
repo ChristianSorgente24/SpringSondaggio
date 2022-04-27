@@ -35,6 +35,7 @@ public class UtenteSondaggioRestController {
 	@Autowired
 	private SondaggioService sondaggioService;
 
+	
 	@GetMapping("/canVoto/{id_sondaggio}")
 	public long canVoto(@PathVariable long id_sondaggio, HttpSession session) {
 
