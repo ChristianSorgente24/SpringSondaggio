@@ -11,7 +11,7 @@
 	<groupId>com.milano</groupId>
 	<artifactId>sondaggio</artifactId>
 	<version>1.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>sondaggio</name>
 	<description>Progetto Spring Boot sondaggio</description>
 	<properties>
